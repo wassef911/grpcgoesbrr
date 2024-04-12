@@ -1,3 +1,5 @@
 grpcio==1.62.1
 grpcio-tools==1.62.1
 pydantic==2.7.0
+pytest-env
+pytest-sugar==1.0.0

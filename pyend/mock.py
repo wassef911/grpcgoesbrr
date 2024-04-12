@@ -13,7 +13,7 @@ class MockModel:
         """
         # Generate a random prediction for each feature vector
         # (okey to use random here since this is a mock model for fun!)
-        return [random.choice(["TotalFraudDude", "LooksLegit"]) for _ in features]
+        return [random.choice([True, False]) for _ in features]
 
     def predict_proba(self, features):
         """Simulate model probability predictions.

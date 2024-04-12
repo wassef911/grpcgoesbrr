@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, "core_pb2", _globals)
-if _descriptor._USE_C_DESCRIPTORS == False:
+if _descriptor._USE_C_DESCRIPTORS is False:
     DESCRIPTOR._options = None
     _globals["_PREDICTIONREQUEST"]._serialized_start = 32
     _globals["_PREDICTIONREQUEST"]._serialized_end = 161
