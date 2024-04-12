@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package fraud_detection;
+
+message PredictionRequest {
+    int64 transaction_id = 1;
+    double amount = 2;
+    int64 time = 3;  
+    int32 age_of_account = 4;
+    int32 number_of_transactions = 5;
+}
+
+message PredictionResponse {
+    int64 transaction_id = 1;
+    bool predicted_label = 2;  // true for fraudulent, false for non-fraudulent
+    double fraud_probability = 3;
+}
+
+service FraudDetectionService {
+    rpc PredictFraud(PredictionRequest) returns (PredictionResponse);
+}
