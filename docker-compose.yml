@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  pyend:
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile.python
+    command: python -m pyend
+    ports:
+      - "50051:50051"
+    volumes:
+      - ./pyend:/opt/app
+
+  nodeend:
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./pyend:/opt/app

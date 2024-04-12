@@ -5,14 +5,14 @@ ENV PYTHONUNBUFFERED 1
 
 RUN useradd -m appuser
 
-WORKDIR /opt/app
+WORKDIR /opt/pyend
 
-COPY pyenv/requirements.txt /opt/app/
+COPY pyend/requirements.txt /opt/pyend/
 RUN pip install --upgrade pip \
     && pip install --no-cache-dir -r requirements.txt
 
-COPY ./pyenv /opt/app/
-RUN chown -R appuser:appuser /opt/app
+COPY ./pyend /opt/pyend/
+RUN chown -R appuser:appuser /opt/pyend
 USER appuser
 
-RUN chmod +x /opt/app/entrypoint.sh
+WORKDIR /opt
