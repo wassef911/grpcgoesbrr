@@ -3,3 +3,7 @@ grpcio-tools==1.62.1
 pydantic==2.7.0
 pytest-env
 pytest-sugar==1.0.0
+grpcio-reflection==1.62.1
+asyncio
+anyio
+pytest-asyncio

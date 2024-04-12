@@ -5,8 +5,9 @@ from .proto.core_pb2_grpc import (
     FraudDetectionServiceServicer,
     add_FraudDetectionServiceServicer_to_server,
 )
-from .proto.core_pb2 import PredictionRequest, PredictionResponse
+from .proto.core_pb2 import PredictionRequest, PredictionResponse, DESCRIPTOR
 from .ml import HighlySophisticatedModel
+from grpc_reflection.v1alpha import reflection
 
 logger = logging.getLogger(__name__)
 
@@ -22,13 +23,6 @@ class FraudServicer(FraudDetectionServiceServicer):
         self.model = model
 
     def PredictFraud(self, request: PredictionRequest, context) -> PredictionResponse:
-        """
-        int64 transaction_id = 1;
-        double amount = 2;
-        int64 time = 3;
-        int32 age_of_account = 4;
-        int32 number_of_transactions = 5;
-        """
         result = self.model.predict(
             request.transaction_id,
             request.amount,
@@ -36,6 +30,7 @@ class FraudServicer(FraudDetectionServiceServicer):
             request.age_of_account,
             request.number_of_transactions,
         )
+        context.set_code(grpc.StatusCode.OK)
         return PredictionResponse(**result.model_dump(exclude_none=True))
 
 
@@ -52,6 +47,11 @@ class App:
             FraudServicer(self.fraud_model), server
         )
 
+        SERVICE_NAMES = (
+            DESCRIPTOR.services_by_name["FraudDetectionService"].full_name,
+            reflection.SERVICE_NAME,
+        )
+        reflection.enable_server_reflection(SERVICE_NAMES, server)
         server.add_insecure_port(f"[{HOST}]:{PORT}")
         server.start()
         logger.info(f"🚀 Server is running on port {PORT}...")
