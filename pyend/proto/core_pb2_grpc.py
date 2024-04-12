@@ -3,7 +3,7 @@
 
 import grpc
 
-import core_pb2 as core__pb2
+import pyend.proto.core_pb2 as core__pb2
 
 
 class FraudDetectionServiceStub(object):

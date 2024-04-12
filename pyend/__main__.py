@@ -1,13 +1,15 @@
 import logging
 import grpc
 from concurrent import futures
-from pyend.proto.core_pb2_grpc import (
+from .proto.core_pb2_grpc import (
     FraudDetectionServiceServicer,
     add_FraudDetectionServiceServicer_to_server,
 )
-from pyend.proto.core_pb2 import PredictionRequest, PredictionResponse
-from pyend.ml import HighlySuffincticatedModel
+from .proto.core_pb2 import PredictionRequest, PredictionResponse
+from .ml import HighlySuffincticatedModel
+import sys
 
+logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # Imagine these as env variables.
@@ -44,6 +46,7 @@ class App:
         self.fraud_model = HighlySuffincticatedModel(pickle_path)
 
     def run(self):
+        logger.info("Starting server...")
         server = grpc.server(futures.ThreadPoolExecutor(max_workers=2))
 
         add_FraudDetectionServiceServicer_to_server(
