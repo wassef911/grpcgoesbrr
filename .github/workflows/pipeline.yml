@@ -19,10 +19,8 @@ jobs:
         run: |
           docker-compose up -d
 
-          sleep 10
+          sleep 5
 
-          pip install -r pyend/requirements.txt
+          pip install -r pyend/requirements.test.txt
 
           pytest
-
-          docker-compose down
