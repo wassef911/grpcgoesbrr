@@ -11,6 +11,11 @@ services:
       - 50051
     volumes:
       - ./pyend:/opt/app
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: 256M
 
   nodeend:
     restart: unless-stopped
@@ -21,3 +26,8 @@ services:
       - "8000:8000"
     volumes:
       - ./pyend:/opt/app
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: 256M
