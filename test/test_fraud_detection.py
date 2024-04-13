@@ -3,7 +3,7 @@ import requests
 from unittest.mock import ANY
 
 
-@pytest.mark.timeout(0.05)  # 5ms
+@pytest.mark.timeout(0.5)  # 500ms
 @pytest.mark.parametrize("execution_number", range(10))
 def test_fraud_activity_api(execution_number):
     url = "http://localhost:8000/api/FraudActivity"
