@@ -1,11 +1,11 @@
 import { Router, Request, Response } from "express";
 import FraudService from "./services";
 
-const CORE_PROTO_PATH = process.env.CORE_PROTO_PATH || "../core.proto";
+const CORE_PROTO_PATH = process.env.CORE_PROTO_PATH || "./core.proto";
 const GRPC_SERVER_ADDRESS =
-  process.env.GRPC_SERVER_ADDRESS || "localhost:50051";
-const router = Router();
+  process.env.GRPC_SERVER_ADDRESS || "pyend:50051";
 
+const router = Router();
 const fraudService = new FraudService(CORE_PROTO_PATH, GRPC_SERVER_ADDRESS);
 
 router.get("/FraudActivity", async (req: Request, res: Response) => {

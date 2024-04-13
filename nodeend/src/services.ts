@@ -19,11 +19,11 @@ interface IPredictionResponse {
 class BaseGrpcService {
     protected proto_buff: PackageDefinition;
 
-    constructor(proto_path: string, server_address: string) {
-        this.proto_buff = protoLoader.loadSync(proto_path, {
-            keepCase: true,
+    constructor(protobuffer_path: string) {
+        this.proto_buff = protoLoader.loadSync(protobuffer_path, {
             longs: String,
             enums: String,
+            keepCase: true,
             defaults: true,
             oneofs: true,
         });
@@ -33,7 +33,6 @@ class BaseGrpcService {
         return grpc.loadPackageDefinition(
             proto_buff
         );
-
     }
 }
 
@@ -41,8 +40,8 @@ class FraudService extends BaseGrpcService {
     private fraudPackage: any;
     private client: any;
 
-    constructor(proto_path: string, server_address: string) {
-        super(proto_path, server_address);
+    constructor(protobuffer_path: string, server_address: string) {
+        super(protobuffer_path);
         this.fraudPackage = this.getPackagesFrom(this.proto_buff).fraud_detection as any;
         this.client = new this.fraudPackage.FraudDetectionService(
             server_address,

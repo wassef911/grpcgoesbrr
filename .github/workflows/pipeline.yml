@@ -17,4 +17,12 @@ jobs:
 
       - name: Run Pytest
         run: |
-          echo "to be done later, let's do something a bit fancy!"
+          docker-compose up -d
+
+          sleep 10
+
+          pip install -r pyend/requirements.txt
+
+          pytest
+
+          docker-compose down

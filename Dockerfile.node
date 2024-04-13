@@ -10,4 +10,6 @@ COPY ./nodeend .
 
 COPY ./*.proto .
 
-CMD ["npm", "run", "src/index.ts"]
+RUN npm run build
+
+CMD ["node", "dist/index.js"]
