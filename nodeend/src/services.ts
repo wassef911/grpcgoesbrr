@@ -1,4 +1,4 @@
-import grpc, { GrpcObject, PackageDefinition } from "grpc";
+import grpc from "grpc";
 import * as protoLoader from "@grpc/proto-loader";
 
 interface IPredictionRequest {
@@ -17,9 +17,9 @@ interface IPredictionResponse {
 
 
 class BaseGrpcService {
-    protected proto_buff: PackageDefinition;
+    protected proto_buff: grpc.PackageDefinition;
 
-    constructor(protobuffer_path: string) {
+    constructor(protobuffer_path: string,) {
         this.proto_buff = protoLoader.loadSync(protobuffer_path, {
             longs: String,
             enums: String,
@@ -29,7 +29,7 @@ class BaseGrpcService {
         });
     }
 
-    protected getPackagesFrom(proto_buff: PackageDefinition): grpc.GrpcObject {
+    protected getPackagesFrom(proto_buff: grpc.PackageDefinition): grpc.GrpcObject {
         return grpc.loadPackageDefinition(
             proto_buff
         );
