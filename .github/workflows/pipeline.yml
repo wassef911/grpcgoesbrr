@@ -1,0 +1,26 @@
+name: Test
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  unit_test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run Pytest
+        run: |
+          docker-compose up -d
+
+          sleep 5
+
+          pip install -r pyend/requirements.test.txt
+
+          pytest

@@ -34,7 +34,7 @@ class FraudServicer(FraudDetectionServiceServicer):
         return PredictionResponse(**result.model_dump(exclude_none=True))
 
 
-class App:
+class Pyend:
     def __init__(self, fraud_model: HighlySophisticatedModel) -> None:
         self.fraud_model = fraud_model
         self.server = None
